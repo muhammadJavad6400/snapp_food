@@ -28,6 +28,5 @@ Route::middleware([
 });
 
 // Admin Routes:
-
 Route::resource('/shop' , ShopController::class);
 
