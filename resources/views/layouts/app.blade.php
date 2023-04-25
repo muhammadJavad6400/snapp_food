@@ -16,6 +16,8 @@
 
         <!-- Styles -->
         @livewireStyles
+        <link rel="stylesheet" href="/css/style.css">
+        
     </head>
     <body class="font-sans antialiased">
         <x-banner />
