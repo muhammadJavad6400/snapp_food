@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ShopRequest;
 
 class ShopController extends Controller
 {
@@ -17,7 +19,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('shop.index');
+        $shops = Shop::all();
+        return view('shop.index' ,  compact('shops'));
     }
 
     /**
@@ -31,9 +34,34 @@ class ShopController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ShopRequest $request)
     {
-        //
+        //validation Request
+        $validation_shop = $request->validated();
+
+        // create user in db
+        $randomPassword = random_int(1000 , 9999);
+        $user = User::create([
+            'name' => $validation_shop['username'],
+            'email' => $validation_shop['email'],
+            'role' => 'shop',
+            'email_verified_at' => now(),
+            'password' => bcrypt($randomPassword)
+        ]);
+
+        //create shop in db
+        Shop::create([
+            'user_id' => $user->id,
+            'title' => $validation_shop['title'],
+            'first_name' => $validation_shop['first_name'],
+            'last_name' => $validation_shop['last_name'],
+            'telephone' => $validation_shop['telephone'],
+            'address' => $validation_shop['address']
+        ]);
+
+        //redirect
+        return redirect()->route('shop.index')->withMessage(__('SUCCESS'));
+
     }
 
     /**
@@ -55,7 +83,7 @@ class ShopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Shop $shop)
+    public function update(ShopRequest $request, Shop $shop)
     {
         //
     }

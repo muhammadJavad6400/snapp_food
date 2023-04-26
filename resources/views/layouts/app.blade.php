@@ -38,6 +38,17 @@
             <main>
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        @if ($errors->any())
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 mb-4">
+                            <x-validation-errors/>
+                        </div> 
+                        @endif
+
+                        @if ($message=session('message'))
+                        <div class="bg-green-400 text-gray-50 overflow-hidden shadow-xl sm:rounded-lg p-4 mb-4">
+                            {{ $message }}
+                        </div>   
+                        @endif
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                             {{ $slot }}  
                         </div>

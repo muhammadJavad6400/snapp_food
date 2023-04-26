@@ -212,5 +212,6 @@ return [
         'updated_at'               => 'بروزشده در',
         'username'                 => 'نام کاربری',
         'year'                     => 'سال',
+        'telephone'                => 'تلفن',
     ],
 ];

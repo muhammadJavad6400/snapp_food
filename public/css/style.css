@@ -2,3 +2,16 @@ body {
     direction: rtl;
     text-align: right;
 }
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #334155;
+}
+
+th, td {
+    padding: 10px;
+}
+
