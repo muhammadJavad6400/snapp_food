@@ -18,3 +18,11 @@ th, td {
 tbody > tr:nth-child(even) {
     background-color: #e2e8f0;
 }
+
+.swal-button--ok, .swal-button--confirm {
+    background-color: #6875F5;
+}
+
+.swal-button--ok:hover, .swal-button--confirm:hover {
+    background-color: #4d5dff !important;
+}

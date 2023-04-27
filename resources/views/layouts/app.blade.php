@@ -59,6 +59,9 @@
 
         @stack('modals')
 
+        <script src="/js/custom.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         @livewireScripts
     </body>
 </html>
