@@ -28,5 +28,6 @@ Route::middleware([
 });
 
 // Admin Routes:
-Route::resource('/shop' , ShopController::class);
+Route::resource('/shop' , ShopController::class)->except('show');
+Route::resource('/product', ProductController::class)->except('show');
 

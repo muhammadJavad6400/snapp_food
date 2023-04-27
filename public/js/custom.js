@@ -21,7 +21,7 @@ deleteBtns.forEach((btn , i) => {
                 });
             } else {
               swal({
-                title: "آیتم مورد نظر حذف نشد",
+                text: "آیتم مورد نظر حذف نشد",
                 buttons:{
                     ok: "تایید"
                 }

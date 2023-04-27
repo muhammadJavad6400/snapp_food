@@ -11,13 +11,20 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link class="mx-2" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
+                    @if (auth()->check() && auth()->user()->role == 'admin')
+                    <x-nav-link class="mx-2" href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                         مدیریت رستوران ها
-                    </x-nav-link>
+                    </x-nav-link>   
+                    @endif
+                    @if (auth()->check() && auth()->user()->role == 'admin' || auth()->user()->role == 'shop')
+                    <x-nav-link class="mx-2" href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
+                         مدیریت محصولات
+                    </x-nav-link>   
+                    @endif
                 </div>
             </div>
 

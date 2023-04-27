@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
 use App\Http\Requests\UpdateShopRequest;
+use App\Notifications\NewShop;
 
 
 class ShopController extends Controller
@@ -42,13 +43,13 @@ class ShopController extends Controller
         $validation_shop = $request->validated();
 
         // create user in db
-        $randomPassword = random_int(1000 , 9999);
+       // $randomPassword = random_int(1000 , 9999);
         $user = User::create([
             'name' => $validation_shop['username'],
             'email' => $validation_shop['email'],
             'role' => 'shop',
             'email_verified_at' => now(),
-            'password' => bcrypt($randomPassword)
+            'password' => bcrypt('shop')
         ]);
 
         //create shop in db
@@ -61,7 +62,8 @@ class ShopController extends Controller
             'address' => $validation_shop['address']
         ]);
 
-       
+        //notify user
+        //$user->notify(new NewShop($user->email, $randomPassword));
 
         //redirect
         return redirect()->route('shop.index')->withMessage(__('SUCCESS'));

@@ -4,6 +4,11 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+        @if (auth()->check() && auth()->user()->role == 'admin')
+            Admin   
+        @endif
 
-        salam
+        @if (auth()->check() && auth()->user()->role == 'shop')
+            shop  
+        @endif
 </x-app-layout>
