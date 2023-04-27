@@ -19,17 +19,34 @@
                     <th> عنوان </th>
                     <th>  نام متصدی </th>
                     <th>تلفن </th>
+                    <th>ایمیل </th>
+                    <th>نام کاربری </th>
                     <th> تاریخ شروع فعالیت</th>
+                    <th colspan="2"> عملیات </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($shops as $key => $shop)
-                    <tr class="hover:bg-gray-400 transition ease-in-out delay duration-500">
+                    <tr>
                         <th> {{$key+1}} </th>
                         <td>{{ $shop->title}}</td>
-                        <td>{{ $shop->first_name }} {{ $shop->last_name }}</td>
+                        <td>{{ $shop->full_name }}</td>
                         <td>{{ $shop->telephone }}</td>
-                        <td>{{ $shop->created_at }}</td>
+                        <td>{{ $shop->user->email ?? '-' }}</td>
+                        <td>{{ $shop->user->name ?? '-'}}</td>
+                        <td>{{ persionDate($shop->created_at) }}</td>
+                        <td><a href="{{ route('shop.edit' , $shop->id) }}" class="'inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-400 active:bg-green-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'">ویرایش</a></td>
+                        <td>
+                            <form action="{{ route('shop.destroy' , $shop->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+
+                                <button type="submit" class="'inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-400 active:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'">حدف</button>
+
+
+
+                            </form>
+                        </td>
 
                     </tr>    
                 @endforeach

@@ -6,6 +6,8 @@ use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
+use App\Http\Requests\UpdateShopRequest;
+
 
 class ShopController extends Controller
 {
@@ -59,6 +61,8 @@ class ShopController extends Controller
             'address' => $validation_shop['address']
         ]);
 
+       
+
         //redirect
         return redirect()->route('shop.index')->withMessage(__('SUCCESS'));
 
@@ -77,15 +81,26 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        return view('shop.edit' , compact('shop'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ShopRequest $request, Shop $shop)
+    public function update(UpdateShopRequest $request, Shop $shop)
     {
-        //
+        //validation update
+        $validation_shop_update = $request->validated();
+        
+        //update 
+        $shop->update($validation_shop_update);
+        
+
+        //redirect
+        return redirect()->route('shop.index')->withMessage(__('SUCCESS'));
+      
+        
+
     }
 
     /**
@@ -93,6 +108,11 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        //
+        User::where('id' , $shop->user_id)->delete();
+        $shop->delete();
+
+         //redirect
+         return redirect()->route('shop.index')->withMessage(__('DELETED'));
+
     }
 }
