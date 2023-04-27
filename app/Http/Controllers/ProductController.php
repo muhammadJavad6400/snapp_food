@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth' ,'seller']);
+        
+    }
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('product.index' ,  compact('products'));
     }
 
     /**
@@ -20,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
@@ -44,7 +51,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit' ,  compact('product'));
     }
 
     /**
@@ -60,6 +67,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        //redirect
+        return redirect()->route('product.index')->withMessage(__('DELETED'));
     }
 }
