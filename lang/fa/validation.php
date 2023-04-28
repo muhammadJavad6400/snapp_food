@@ -213,5 +213,9 @@ return [
         'username'                 => 'نام کاربری',
         'year'                     => 'سال',
         'telephone'                => 'تلفن',
+        'price'                    => 'قیمت',
+        'discount'                 => 'تخفیف',
+        'Row_material'             => 'مواد اولیه',
+        'image'                    => 'تصویر',
     ],
 ];

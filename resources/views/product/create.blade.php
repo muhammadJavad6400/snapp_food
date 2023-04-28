@@ -11,8 +11,8 @@
         <div class="grid grid-cols-12 gap-4">
 
             <div class="col-span-3">
-                <x-label for="title" value=" عنوان محصول" class="p-2"/>
-                <x-input id="title" class="block mt-r w-full" type="text" name="title" :value="old('title')" autofocus />
+                <x-label for="name" value=" عنوان محصول" class="p-2"/>
+                <x-input id="name" class="block mt-r w-full" type="text" name="name" :value="old('name')" autofocus />
             </div>
     
             <div class="col-span-3">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+use App\Models\Shop;
 
 class ProductController extends Controller
 {
@@ -33,9 +35,20 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        dd($request->all());
+        //validation Request
+        $product_validation = $request->validated();
+
+        //shop id
+        $shop = Shop::where('user_id' , auth()->id())->firstOrfail();
+        $product_validation['shop_id'] = $shop->id;
+        
+        //create Product
+        Product::create($product_validation);
+
+        //redirect
+        return redirect()->route('product.index')->withMessage(__('SUCCESS'));
     }
 
     /**
@@ -57,7 +70,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         //
     }
