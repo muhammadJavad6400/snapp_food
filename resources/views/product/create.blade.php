@@ -4,6 +4,7 @@
             مدیریت محصولات
         </h2>
     </x-slot>
+
     
     <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -11,8 +12,8 @@
         <div class="grid grid-cols-12 gap-4">
 
             <div class="col-span-3">
-                <x-label for="name" value=" عنوان محصول" class="p-2"/>
-                <x-input id="name" class="block mt-r w-full" type="text" name="name" :value="old('name')" autofocus />
+                <x-label for="title" value=" عنوان محصول" class="p-2"/>
+                <x-input id="title" class="block mt-r w-full" type="text" name="title" :value="old('title')" autofocus />
             </div>
     
             <div class="col-span-3">

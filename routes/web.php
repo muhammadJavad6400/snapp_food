@@ -31,3 +31,6 @@ Route::middleware([
 Route::resource('/shop' , ShopController::class)->except('show');
 Route::resource('/product', ProductController::class)->except('show');
 
+
+
+

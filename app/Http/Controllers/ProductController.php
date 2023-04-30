@@ -43,9 +43,13 @@ class ProductController extends Controller
         //shop id
         $shop = Shop::where('user_id' , auth()->id())->firstOrfail();
         $product_validation['shop_id'] = $shop->id;
-        
+        if(isset($product_validation['image']) && $product_validation['image']){
+
+            $product_validation['iamge'] = upload($product_validation['image']);
+        }
         //create Product
         Product::create($product_validation);
+    
 
         //redirect
         return redirect()->route('product.index')->withMessage(__('SUCCESS'));
