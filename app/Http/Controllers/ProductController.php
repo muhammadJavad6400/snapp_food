@@ -35,7 +35,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $shops = Shop::all();
+        return view('product.create' , compact('shops'));
     }
 
     /**
@@ -76,7 +77,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.edit' ,  compact('product'));
+        $shops = Shop::all();
+        return view('product.edit' ,  compact('product' , 'shops'));
     }
 
     /**

@@ -30,4 +30,9 @@ deleteBtns.forEach((btn , i) => {
             }
           });
     });
-})
+});
+
+$(document).ready(function() {
+  $('.select2').select2({
+  });
+});

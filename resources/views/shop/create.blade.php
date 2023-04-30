@@ -7,7 +7,6 @@
     
     <form class="grid grid-cols-3 gap-4" action="{{ route('shop.store') }}" method="POST">
         @csrf
-
         <div>
             <x-label for="title" value="عنوان" class="p-2"/>
             <x-input id="title" class="block mt-r w-full" type="text" name="title" :value="old('title')" autofocus />

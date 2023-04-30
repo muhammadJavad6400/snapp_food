@@ -5,10 +5,26 @@
         </h2>
     </x-slot>
 
+   
+
     
     <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
+        @if (auth()->check() && auth()->user()->role == 'admin')
+        <div class="flex justify-center mb-5">
+            <div class="">
+                <select name="shop_id" class="select2 w-96">
+                    <option value="">انتخاب کنید...</option>
+                    @foreach ($shops as $shop)
+                        <option value="{{ $shop->id }}">{{ $shop->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>       
+        @endif 
+        
+        <hr class="my-4">
         <div class="grid grid-cols-12 gap-4">
 
             <div class="col-span-3">
