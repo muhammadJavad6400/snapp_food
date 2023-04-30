@@ -17,4 +17,10 @@ class Product extends Model
         'Row_material',
         'image',
     ];
+
+    public function shops()
+    {
+        return $this->belongsTo(Shop::class);
+        
+    }
 }

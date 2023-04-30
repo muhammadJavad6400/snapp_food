@@ -29,6 +29,5 @@ deleteBtns.forEach((btn , i) => {
               });
             }
           });
-    
     });
 })

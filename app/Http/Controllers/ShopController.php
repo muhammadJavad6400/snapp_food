@@ -115,6 +115,5 @@ class ShopController extends Controller
 
          //redirect
          return redirect()->route('shop.index')->withMessage(__('DELETED'));
-
     }
 }
