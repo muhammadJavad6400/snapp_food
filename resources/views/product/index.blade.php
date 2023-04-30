@@ -13,6 +13,49 @@
         <hr class="my-4">
 
 
+        <table>
+            <thead>
+                <tr>
+                    <th> # </th>
+                    <th> عنوان </th>
+                    <th>قمیت</th>
+                    <th>تخفیف </th>
+                    <th>تصویر </th>
+                    <th colspan="2"> عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $key => $product)
+                    <tr>
+                        <th> {{$key+1}} </th>
+                        <td>{{ $product->title}}</td>
+                        <td>{{{number_format( $product->price )}}}</td>
+                        <td>{{ $product->discount }}</td>
+                        <td>
+                            @if ($product->image)
+                                <span class="text-green-500">دارد</span>
+                                
+                            @else
+                            <span class="text-red-500">ندارد</span>
+                                
+                            @endif
+                        </td>
+                        <td><a href="{{ route('product.edit' , $product->id) }}" class="'inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-400 active:bg-green-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'">ویرایش</a></td>
+                        <td>
+                            <form action="{{ route('product.destroy' , $product->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+
+                                <button type="button" class=" delete-record inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-400 active:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">حدف</button>
+
+                            </form>
+                        </td>
+                    </tr>    
+                @endforeach 
+            </tbody>
+        </table>        
+
+
 
 
         @endif       

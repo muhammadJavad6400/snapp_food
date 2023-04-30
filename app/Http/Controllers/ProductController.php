@@ -20,7 +20,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        if (auth()->user()->role == 'admin') {
+            $products = Product::all();
+        }else
+        {
+            $products = Product::where('shop_id' , currentShopId())->get();
+        }
+        
         return view('product.index' ,  compact('products'));
     }
 
@@ -41,8 +47,10 @@ class ProductController extends Controller
         $product_validation = $request->validated();
 
         //shop id
-        $shop = Shop::where('user_id' , auth()->id())->firstOrfail();
-        $product_validation['shop_id'] = $shop->id;
+        
+        $product_validation['shop_id'] =  currentShopId();
+
+        //Image
         if(isset($product_validation['image']) && $product_validation['image']){
 
             $product_validation['iamge'] = upload($product_validation['image']);
@@ -76,7 +84,21 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        //
+        //validation Request
+        $product_validation = $request->validated();
+
+
+        //Image
+        if(isset($product_validation['image']) && $product_validation['image']){
+
+            $product_validation['iamge'] = upload($product_validation['image']);
+        }
+        //update product
+        $product->update($product_validation);
+
+        //redirect
+        return redirect()->route('product.index')->withMessage(__('SUCCESS'));
+
     }
 
     /**

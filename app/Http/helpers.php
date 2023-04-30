@@ -30,3 +30,9 @@ function randomSHA()
     return bin2hex(random_bytes(10));
 }
 
+function currentShopId()
+{
+    $shop = \App\Models\Shop::where('user_id' , auth()->id())->firstOrfail();
+    return $shop->id ?? 0;
+}
+

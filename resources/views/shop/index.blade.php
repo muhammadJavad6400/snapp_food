@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th> # </th>
+                    <th>نام رستوران</th>
                     <th> عنوان </th>
                     <th>  نام متصدی </th>
                     <th>تلفن </th>
@@ -29,6 +30,7 @@
                 @foreach ($shops as $key => $shop)
                     <tr>
                         <th> {{$key+1}} </th>
+                        <td>...</td>
                         <td>{{ $shop->title}}</td>
                         <td>{{ $shop->full_name }}</td>
                         <td>{{ $shop->telephone }}</td>
