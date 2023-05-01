@@ -59,18 +59,14 @@ class ProductController extends Controller
         if(!($product_validation['discount'])){
             $product_validation['discount'] = 0;
         }
-
+        //Access to All shop
         if(auth()->user()->role == 'admin'){
             $product_validation['shop_id'] = $request->shop_id;
-
         }else{
         //shop id
         $product_validation['shop_id'] = currentShopId();
         }
         
-        //dd($product_validation);
-        
-
         //create Product
         Product::create($product_validation);
     
@@ -110,6 +106,11 @@ class ProductController extends Controller
 
             $product_validation['iamge'] = upload($product_validation['image']);
         }
+        //change shop name in the Edit page
+        if(auth()->user()->role == 'admin'){
+            $product_validation['shop_id'] = $request->shop_id;
+        }
+        //dd($product_validation);
         //update product
         $product->update($product_validation);
 

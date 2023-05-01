@@ -13,6 +13,21 @@
         <hr class="my-4">
     @endif
 
+    @if (auth()->check() && auth()->user()->role == 'admin')
+    <div class="flex justify-center mb-5">
+        <div class="w-1/4 my-3 px-3">
+                <label for="shop_id" class="block mb-2">انتخاب فروشگاه</label>
+            <select name="shop_id" class="select2 w-96">
+                <option value="">انتخاب کنید...</option>
+                @foreach ($shops as $shop)
+                    <option @if ($product->shop_id == $shop->id) @selected(true) @endif value="{{ $shop->id }}">{{ $shop->title }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>   
+    <hr class="my-4">    
+    @endif 
+
     
     
     <form action="{{ route('product.update' , $product->id) }}" method="POST" enctype="multipart/form-data">

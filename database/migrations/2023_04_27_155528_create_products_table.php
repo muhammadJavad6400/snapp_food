@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('shop_id');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->string('title');
             $table->unsignedBigInteger('price');
             $table->text('Row_material')->nullable();

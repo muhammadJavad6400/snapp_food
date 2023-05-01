@@ -18,12 +18,12 @@
                 <tr>
                     <th> # </th>
                     @if (auth()->check() && auth()->user()->role == 'admin')
-                        <th>نام رستوران</th>
-                        
+                        <th>نام رستوران</th>   
                     @endif
-                    <th> عنوان </th>
-                    <th>قمیت</th>
-                    <th>تخفیف </th>
+                    <th>عنوان</th>
+                    <th>قیمت اولیه</th>
+                    <th>تخفیف</th>
+                    <th>قیمت فروش</th>
                     <th>تصویر </th>
                     <th colspan="2"> عملیات</th>
                 </tr>
@@ -33,12 +33,12 @@
                     <tr>
                         <th> {{$key+1}} </th>
                         @if (auth()->check() && auth()->user()->role == 'admin')
-                            <td>{{ $product->shop->title ?? '-' }}</td>
-                            
+                            <td>{{$product->shop->title ?? '-' }}</td>    
                         @endif
                         <td>{{ $product->title}}</td>
                         <td>{{{number_format( $product->price )}}}</td>
-                        <td>{{ $product->discount }}</td>
+                        <td>{{ $product->discount}}</td>
+                        <td>{{ number_format($product->price2) }}</td>
                         <td>
                             @if ($product->image)
                                 <span class="text-green-500">دارد</span>

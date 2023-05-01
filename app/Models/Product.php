@@ -17,10 +17,15 @@ class Product extends Model
         'Row_material',
         'image',
     ];
+    protected $appends = ['price2'];
 
-    public function shops()
+    public function getPrice2Attribute()
     {
-        return $this->belongsTo(Shop::class);
-        
+        return $this->price - (($this->price * $this->discount) / 100);    
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);    
     }
 }
