@@ -15,7 +15,7 @@
         <div class="flex justify-center mb-5">
             <div class="w-1/4 my-3 px-3">
                     <label for="shop_id" class="block mb-2">انتخاب فروشگاه</label>
-                <select name="shop_id" class="select2 w-96">
+                     <select name="shop_id" class="select2 w-96">
                     <option value="">انتخاب کنید...</option>
                     @foreach ($shops as $shop)
                         <option value="{{ $shop->id }}">{{ $shop->title }}</option>

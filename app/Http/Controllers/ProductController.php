@@ -20,6 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $shops = Shop::all();
         if (auth()->user()->role == 'admin') {
             $products = Product::all();
         }else
@@ -27,7 +28,7 @@ class ProductController extends Controller
             $products = Product::where('shop_id' , currentShopId())->get();
         }
         
-        return view('product.index' ,  compact('products'));
+        return view('product.index' ,  compact('products' , 'shops'));
     }
 
     /**
