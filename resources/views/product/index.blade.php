@@ -17,6 +17,10 @@
             <thead>
                 <tr>
                     <th> # </th>
+                    @if (auth()->check() && auth()->user()->role == 'admin')
+                        <th>نام رستوران</th>
+                        
+                    @endif
                     <th> عنوان </th>
                     <th>قمیت</th>
                     <th>تخفیف </th>
@@ -28,6 +32,10 @@
                 @foreach ($products as $key => $product)
                     <tr>
                         <th> {{$key+1}} </th>
+                        @if (auth()->check() && auth()->user()->role == 'admin')
+                            <td>{{ $product->shop->title ?? '-' }}</td>
+                            
+                        @endif
                         <td>{{ $product->title}}</td>
                         <td>{{{number_format( $product->price )}}}</td>
                         <td>{{ $product->discount }}</td>

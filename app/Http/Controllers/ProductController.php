@@ -47,15 +47,30 @@ class ProductController extends Controller
         //validation Request
         $product_validation = $request->validated();
 
-        //shop id
         
-        $product_validation['shop_id'] =  currentShopId();
 
         //Image
         if(isset($product_validation['image']) && $product_validation['image']){
 
             $product_validation['iamge'] = upload($product_validation['image']);
         }
+
+        //ِDiscount Default
+        if(!($product_validation['discount'])){
+            $product_validation['discount'] = 0;
+        }
+
+        if(auth()->user()->role == 'admin'){
+            $product_validation['shop_id'] = $request->shop_id;
+
+        }else{
+        //shop id
+        $product_validation['shop_id'] = currentShopId();
+        }
+        
+        //dd($product_validation);
+        
+
         //create Product
         Product::create($product_validation);
     
