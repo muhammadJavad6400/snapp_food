@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RestoreController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +32,10 @@ Route::middleware([
 
 // Admin Routes:
 Route::resource('/shop' , ShopController::class)->except('show');
+Route::post("/product/{id}/restore", [ProductController::class , 'restore'])->name('product.restore');
 Route::resource('/product', ProductController::class)->except('show');
+
+
 
 
 

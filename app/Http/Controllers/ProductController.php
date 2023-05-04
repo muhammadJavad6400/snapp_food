@@ -15,34 +15,58 @@ class ProductController extends Controller
         
     }
     
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
         $shops = Shop::all();
-        if (auth()->user()->role == 'admin') {
-            $products = Product::all();
-        }else
-        {
-            $products = Product::where('shop_id' , currentShopId())->get();
+        $products = Product::query();
+
+        //Search for Shop name
+        if(auth()->user()->role == 'admin'){
+            if ($request->s){
+                $products = $products->where('shop_id' , $request->s);
+            }
+        }else{
+            $products = $products->where('shop_id' , currentShopId());
         }
-        
+
+        //Search for Product name
+        if($request->t){
+            $products = $products->where('title' , 'like' , "%$request->t%");
+        }
+
+        //Search and Show Delete Product
+        if($request->d){
+            $products = $products->withTrashed();
+        }
+
+        //Ordering
+        if($order = $request->o){
+            if($order == 1){
+                $products = $products->orderBy('price' , 'ASC');
+            }
+            if($order == 2){
+                $products = $products->orderBy('price' , 'DESC');
+            }
+            if($order == 3){
+                $products = $products->orderBy('created_at' , 'DESC');
+            }
+            if($order == 4){
+                $products = $products->orderBy('created_at' , 'ASC');
+            }
+        }
+
+
+        $products = $products->get();
         return view('product.index' ,  compact('products' , 'shops'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $shops = Shop::all();
         return view('product.create' , compact('shops'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(ProductRequest $request)
     {
         //validation Request
@@ -76,26 +100,20 @@ class ProductController extends Controller
         return redirect()->route('product.index')->withMessage(__('SUCCESS'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Product $product)
     {
         $shops = Shop::all();
         return view('product.edit' ,  compact('product' , 'shops'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(ProductRequest $request, Product $product)
     {
         //validation Request
@@ -108,9 +126,9 @@ class ProductController extends Controller
             $product_validation['iamge'] = upload($product_validation['image']);
         }
         //change shop name in the Edit page
-        if(auth()->user()->role == 'admin'){
-            $product_validation['shop_id'] = $request->shop_id;
-        }
+        // if(auth()->user()->role == 'admin'){
+        //     $product_validation['shop_id'] = $request->shop_id;
+        // }
         //dd($product_validation);
         //update product
         $product->update($product_validation);
@@ -120,9 +138,15 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->where('id' , $id)->firstOrFail();
+        $product->restore();
+        dd($product);
+        //redirect
+        return redirect()->route('product.index')->withMessage(__('SUCCESS'));      
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();

@@ -20,7 +20,7 @@
             <select name="shop_id" class="select2 w-96">
                 <option value="">انتخاب کنید...</option>
                 @foreach ($shops as $shop)
-                    <option @if ($product->shop_id == $shop->id) @selected(true) @endif value="{{ $shop->id }}">{{ $shop->title }}</option>
+                    <option @if ($product->shop_id == $shop->id) selected @endif value="{{ $shop->id }}">{{ $shop->title }}</option>
                 @endforeach
             </select>
         </div>
