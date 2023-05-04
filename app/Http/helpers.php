@@ -4,7 +4,6 @@ function persionDate($enDate)
 {
     $faDate = \Morilog\Jalali\Jalalian::fromCarbon($enDate);
     return $faDate->format('Y-m-d');
-
 }
 
 function short($string, $max=50)
@@ -34,5 +33,21 @@ function currentShopId()
 {
     $shop = \App\Models\Shop::where('user_id' , auth()->id())->firstOrfail();
     return $shop->id ?? 0;
+}
+
+function checkPolicy($model , $object)
+{
+    switch ($model) {
+        case 'product':
+            if($object->shop_id != currentShopId()){
+
+                abort(403);
+            }
+            break;
+        
+        default:
+            abort(403);
+            break;
+    }  
 }
 

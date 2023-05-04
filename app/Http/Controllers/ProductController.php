@@ -107,8 +107,18 @@ class ProductController extends Controller
     }
 
     
-    public function edit(Product $product)
+    public function edit(Product $product ,Request $request)
     {
+         //Access to All shop
+         if(auth()->user()->role == 'admin'){
+            //َAccess to All products
+            $product_validation['shop_id'] = $request->shop_id;
+        }else{
+            // Access and Edit own products
+            checkPolicy('product' , $product);
+        };
+
+        //checkPolicy('product' , $product);
         $shops = Shop::all();
         return view('product.edit' ,  compact('product' , 'shops'));
     }
@@ -116,6 +126,15 @@ class ProductController extends Controller
     
     public function update(ProductRequest $request, Product $product)
     {
+          //Access to All shop
+          if(auth()->user()->role == 'admin'){
+            //َAccess to All products
+            $product_validation['shop_id'] = $request->shop_id;
+        }else{
+            // Access and Edit own products
+            checkPolicy('product' , $product);
+        };
+
         //validation Request
         $product_validation = $request->validated();
 
@@ -138,8 +157,17 @@ class ProductController extends Controller
 
     }
 
-    public function restore($id)
+    public function restore($product , $id , $request)
     {
+        //Access to All shop
+        if(auth()->user()->role == 'admin'){
+            //َAccess to All products
+            $product_validation['shop_id'] = $request->shop_id;
+        }else{
+            // Access and Delete own products
+            checkPolicy('product' , $product);
+        };
+
         $product = Product::withTrashed()->where('id' , $id)->firstOrFail();
         $product->restore();
         dd($product);
@@ -147,10 +175,17 @@ class ProductController extends Controller
         return redirect()->route('product.index')->withMessage(__('SUCCESS'));      
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product , Request $request)
     {
+        //Access to All shop
+        if(auth()->user()->role == 'admin'){
+            //َAccess to All products
+            $product_validation['shop_id'] = $request->shop_id;
+        }else{
+            // Access and Delete own products
+            checkPolicy('product' , $product);
+        };
         $product->delete();
-
         //redirect
         return redirect()->route('product.index')->withMessage(__('DELETED'));
     }
