@@ -30,6 +30,9 @@
                     @endauth
                 </div>
             @endif
+
+            <p class="text-gray-900 text-start">salam</p>
         </div>
+
     </body>
 </html>

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     
-    <form class="grid grid-cols-3 gap-4" action="{{ route('shop.update', $shop->id) }}" method="POST">
+    <form class="grid grid-cols-3 gap-4" action="{{route('shop.update', $shop->id)}}" method="POST">
         @csrf
         @method('put')
 
@@ -40,8 +40,6 @@
             <div class="flex justify-center">
                 <x-button class="mr-4">ذخیره </x-button>   
             </div>
-        </div>
-        
-    </form>
-        
+        </div>     
+    </form>       
 </x-app-layout>

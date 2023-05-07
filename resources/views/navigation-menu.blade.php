@@ -15,11 +15,14 @@
                     <x-nav-link class="mx-2" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+
                     @if (auth()->check() && auth()->user()->role == 'admin')
                     <x-nav-link class="mx-2" href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                         مدیریت رستوران ها
                     </x-nav-link>   
                     @endif
+
                     @if (auth()->check() && auth()->user()->role == 'admin' || auth()->user()->role == 'shop')
                     <x-nav-link class="mx-2" href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                          مدیریت محصولات

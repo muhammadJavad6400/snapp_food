@@ -40,3 +40,4 @@ Route::resource('/product', ProductController::class)->except('show');
 
 
 
+
