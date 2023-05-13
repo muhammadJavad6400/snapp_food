@@ -14,32 +14,25 @@
     <div class="container py-4">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/') }}">صفحه اصلی</a>
+                <a class="nav-link " href="{{ url('/') }}">صفحه اصلی</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('landing' , 'products') }}">محصولات</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('landing' , 'shops') }}">فروشگاه ها</a>
+                <a class="nav-link active" href="{{ route('landing' , 'shops') }}">فروشگاه ها</a>
             </li>
         </ul>
 
         <div class="card mt-4">
             <div class="card-body">
-                <h4>صفحه اصلی</h4>
+                <h4> فروشگاه ها</h4>
                 <hr>
             </div>
         </div>
     </div>
 
     
-
-   
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="/js/public.js"></script>
 </body>

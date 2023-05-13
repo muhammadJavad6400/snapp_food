@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RestoreController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,6 +37,8 @@ Route::post("/product/{id}/restore", [ProductController::class , 'restore'])->na
 Route::resource('/product', ProductController::class)->except('show');
 
 
+// Public Route:
+Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('landing');
 
 
 
