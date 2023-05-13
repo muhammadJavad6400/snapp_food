@@ -51,3 +51,10 @@ function checkPolicy($model , $object)
     }  
 }
 
+
+function currentLandingPage() {
+    if (request()->routeIs('landing')) {
+        $route = request()->route();
+        return $route->parameters['page'];
+    }
+}
