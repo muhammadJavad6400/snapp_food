@@ -21,7 +21,17 @@
                 </div>
                 <hr>
                 <img src="{{asset($product->iamge)}}" alt="">
-                <p>{{ $product->Row_material }}</p>
+                <p class="mt-3">
+                    @if ($product->Row_material)
+                        <p>{{$product->Row_material}}</p>   
+                    @else
+                        <em>بدون توضیحات</em>   
+                    @endif
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#">{{ $product->shop->title ?? '-' }}</a>
+                    <button type="button" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
+                </div>
             </div>
             
         @endforeach
