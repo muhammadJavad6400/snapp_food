@@ -20,7 +20,7 @@
                     </p>
                 </div>
                 <hr>
-                <img src="{{asset($product->iamge)}}" alt="">
+                <img src="{{asset('image/Iranian-dish.jpg')}}" alt="">
                 <p class="mt-3">
                     @if ($product->Row_material)
                         <p>{{$product->Row_material}}</p>   
