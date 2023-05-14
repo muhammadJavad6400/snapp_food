@@ -8,7 +8,7 @@
     @if ($product->image)
         <div class="flex justify-between">
             <h4> تصویر فعلی </h4>
-            <img src="{{ asset($product->image)}}" width="250px">
+            <img src="{{asset($product->image)}}" width="250px">
         </div>
         <hr class="my-4">
     @endif

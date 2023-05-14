@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric|between:0,100',
             'Row_material' => 'nullable|string',
-            'image' => 'nullable|image||mimes:jpg,png,jpeg,gif,svg|max:2000'
+            'image' => 'nullable|image||mimes:jpg,png,jpeg,gif,svg|max:5048'
         ];
     }
 }
