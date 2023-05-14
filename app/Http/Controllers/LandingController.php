@@ -19,7 +19,26 @@ class LandingController extends Controller
 
     public function products()
     {
-        $products = Product::paginate(9);
+        $products = Product::query();
+        if ($p = request('p')) {
+            $products = $products->where('title', 'like', "%$p%");
+        }
+        if($o = request('o')) {
+            if($o == 1) {
+                $products = $products->orderBy('created_at' , 'ASC');
+            }
+            if($o == 2) {
+                $products = $products->orderBy('created_at' , 'DESC');
+            }
+            if($o == 3) {
+                $products = $products->orderBy('price' , 'ASC');
+            }
+            if($o == 4) {
+                $products = $products->orderBy('price' , 'DESC');
+            }
+        }
+
+        $products = $products->paginate(9);
        return view('landing.products' , compact('products'));
     }
 
