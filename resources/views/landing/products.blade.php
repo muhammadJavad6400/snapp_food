@@ -36,5 +36,7 @@
             
         @endforeach
     </div>
-    
+    <hr>
+
+    {{ $products->links() }}
 @endsection

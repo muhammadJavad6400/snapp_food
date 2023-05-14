@@ -113,6 +113,12 @@
                     </tr>    
                 @endforeach 
             </tbody>
-        </table>        
+        </table>   
+        <div class="my-3">
+
+            {{ $products->links() }}
+
+        </div>
+        
         @endif       
 </x-app-layout>
