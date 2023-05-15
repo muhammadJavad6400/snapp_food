@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
@@ -39,6 +40,10 @@ Route::resource('/product', ProductController::class)->except('show');
 
 // Public Route:
 Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('landing');
+
+
+// Cart Route:
+Route::post('/cart/add/{product}' , [CartController::class , 'add'])->name('cart.add');
 
 
 

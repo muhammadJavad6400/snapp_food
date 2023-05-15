@@ -48,10 +48,11 @@
                         <em>بدون توضیحات</em>   
                     @endif
                 </p>
-                <div class="d-flex justify-content-between align-items-center">
+                <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.add' ,  $product->id) }}">
+                    @csrf
                     <a href="#">{{ $product->shop->title ?? '-' }}</a>
-                    <button type="button" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
-                </div>
+                    <button type="submit" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
+                </form>
             </div>
             
         @endforeach
