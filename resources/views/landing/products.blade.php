@@ -50,7 +50,7 @@
                 </p>
                 <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.add' ,  $product->id) }}">
                     @csrf
-                    <a href="#">{{ $product->shop->title ?? '-' }}</a>
+                    <a href="#" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>
                     <button type="submit" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
                 </form>
             </div>
