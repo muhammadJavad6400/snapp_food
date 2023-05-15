@@ -15,25 +15,26 @@ class CartController extends Controller
         $currentLoggedInUser = auth()->user();
 
         if($currentLoggedInUser) {
-            // // Do We Have a Shopping Cart For This User or Not?
-            // $cart = Cart::where('user_id' , $currentLoggedInUser->id)->first();
-            // // If We Don't Have a Shopping Cart, Create One 
-            // if(!$cart) {
-
-            //     $cart = Cart::create(['user_id' => $currentLoggedInUser->id]);
-            // } 
             $cart = Cart::firstOrCreate(['user_id' => $currentLoggedInUser->id]);
-            $cartItem = CartItem::create([
-                'cart_id' => $cart->id,
-                'product_id' => $product->id,
-                'count' => 1,
-                'payable' => $product->price2
-            ]);
+
+            // If The Item Is In The Shopping Cart, It Will Be Edited
+            if($cartItem = $product->isInCart()) {
+                $cartItem->count++;
+                $cartItem->payable = $cartItem->count * $product->price2;
+                $cartItem->save();
+            }else {
+                $cartItem = CartItem::create([
+                    'cart_id' => $cart->id,
+                    'product_id' => $product->id,
+                    'count' => 1,
+                    'payable' => $product->price2
+                ]);
+            }  
             return back()->withMessage('محصول مورد نظر به سبد خرید اضافه شد');
             
         }else{
             return back()->withError('لطفا ابتدا وارد حساب کاربری خود شوید');
         }
-        
+
     }
 }
