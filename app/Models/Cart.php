@@ -10,4 +10,20 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = ['user_id'];
+    protected $appends = ['sum' , 'total' ];
+
+    public function getSumAttribute()
+    {
+        return CartItem::where('cart_id' , $this->id)->sum('payable');  
+    }
+
+    public function getTotalAttribute()
+    {
+        return CartItem::where('cart_id' , $this->id)->sum('count');  
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);    
+    }
 }
