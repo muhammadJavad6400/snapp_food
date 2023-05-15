@@ -9,8 +9,10 @@
             <tr class="text-center ">
                 <th>ردیف</th>
                 <th>محصول</th>
+                <th>فروشگاه</th>
                 <th>تعداد</th>
                 <th>قابل پرداخت</th>
+                <th>حذف</th>
             </tr>
         </thead>
         <tbody>
@@ -18,8 +20,24 @@
                 <tr class="text-center">
                     <th>{{ $key+1 }}</th>
                     <td>{{ $cartItem->product->title ?? '-' }}</td>
-                    <td>{{ $cartItem->count }}</td>
+                    <td>{{ $cartItem->product->shop->title ?? '-' }}</td>
+                    <td>
+                        <form action="{{ route('cart.manage' , $cartItem->product_id) }}" method="post">
+                            @csrf
+                            <button type="submit" name="type" value="minus" class="btn btn-warning btn-sm text-white"> - </button>
+                            <span class="cart-count">{{ $cartItem->count }}</span>
+                            <button type="submit" name="type" value="plus" class="btn btn-warning btn-sm text-white"> + </button>
+                        </div>    
+                        </form>
+                    </td>
                     <td>{{number_format( $cartItem->payable)}}</td>
+                    <td>
+                        <form class="" action="{{ route('cart.remove' , $cartItem->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                        </form>
+                    </td>
                 </tr>   
             @endforeach
         </tbody>

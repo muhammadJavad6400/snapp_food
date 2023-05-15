@@ -21,12 +21,16 @@ class CartController extends Controller
 
             // If The Item Is In The Shopping Cart, It Will Be Edited
             if($cartItem = $product->isInCart()) {
-                if($type == 'plus') {
-                    $cartItem->count++;
-                }else {
-                    $cartItem->count--;
-                }
-                
+                if ($type == 'minus' && $cartItem->count == 1) {
+                    $cartItem->delete();
+                    return back()->withMessage('محصول مورد نظر از سبد خرید حذف شد');
+                } else {
+                    if($type == 'plus') {
+                        $cartItem->count++;
+                    }else {
+                        $cartItem->count--;
+                   }
+                }   
                 $cartItem->payable = $cartItem->count * $product->price2;
                 $cartItem->save();
             }else {
@@ -42,6 +46,14 @@ class CartController extends Controller
         }else{
             return back()->withError('لطفا ابتدا وارد حساب کاربری خود شوید');
         }
+
+    }
+
+    public function remove(CartItem $cartItem)
+    {
+        $cartItem->delete();
+
+        return back()->withMessage('محصول مورد نظر از سبد خرید حذف شد');
 
     }
 }

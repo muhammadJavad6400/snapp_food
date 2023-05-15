@@ -44,6 +44,7 @@ Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('l
 
 // Cart Route:
 Route::post('/cart/manage/{product}' , [CartController::class , 'manage'])->name('cart.manage');
+Route::delete('/cart/{cart_item}' , [CartController::class , 'remove'])->name('cart.remove');
 
 
 
