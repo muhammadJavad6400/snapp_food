@@ -43,7 +43,7 @@ Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('l
 
 
 // Cart Route:
-Route::post('/cart/add/{product}' , [CartController::class , 'add'])->name('cart.add');
+Route::post('/cart/manage/{product}' , [CartController::class , 'manage'])->name('cart.manage');
 
 
 

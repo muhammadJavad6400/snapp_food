@@ -48,28 +48,23 @@
                         <em>بدون توضیحات</em>   
                     @endif
                 </p>
-                <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.add' ,  $product->id) }}">
+                
+                <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.manage' ,  $product->id) }}">
                     @csrf
                     <a href="#" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>
                     @if ($cartItem = $product->isInCart())
                         <div>
-                            <button type="submit" class="btn btn-warning btn-sm text-white"> - </button>
+                            <button type="submit" name="type" value="minus" class="btn btn-warning btn-sm text-white"> - </button>
                             <span class="cart-count">{{ $cartItem->count }}</span>
-                            <button type="submit" class="btn btn-warning btn-sm text-white"> + </button>
-
-                        </div>
-                        
-                        
-                    @else
-                        
-                    <button type="submit" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
+                            <button type="submit" name="type" value="plus" class="btn btn-warning btn-sm text-white"> + </button>
+                        </div>    
+                    @else    
+                    <button type="submit" name="type" value="plus" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
                     @endif
                 </form>
-            </div>
-            
+            </div>    
         @endforeach
     </div>
     <hr>
-
     {{ $products->links() }}
 @endsection

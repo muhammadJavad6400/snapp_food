@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function add(Product $product)
+    public function manage(Product $product , Request $request)
     {
+        $type = $request->type;
+
         // The Current User Is Logged In
         $currentLoggedInUser = auth()->user();
 
@@ -19,7 +21,12 @@ class CartController extends Controller
 
             // If The Item Is In The Shopping Cart, It Will Be Edited
             if($cartItem = $product->isInCart()) {
-                $cartItem->count++;
+                if($type == 'plus') {
+                    $cartItem->count++;
+                }else {
+                    $cartItem->count--;
+                }
+                
                 $cartItem->payable = $cartItem->count * $product->price2;
                 $cartItem->save();
             }else {

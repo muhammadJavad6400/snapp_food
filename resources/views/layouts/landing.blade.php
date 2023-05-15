@@ -25,7 +25,7 @@
             <li class="nav-item">
                 <a class="cart nav-link @if(currentLandingPage() == 'cart') active @endif" href="{{ route('landing' , 'cart') }}"> 
                     سبد خرید
-                    <span> 0 </span>
+                    <span> {{ cartCount() }} </span>
                 </a>
             </li>
             <li class="auth nav-item align-self-center">

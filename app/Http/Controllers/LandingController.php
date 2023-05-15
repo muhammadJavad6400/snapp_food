@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -45,5 +46,12 @@ class LandingController extends Controller
     public function shops()
     {
        return view('landing.shops');
+    }
+
+    public function cart()
+    {
+        $user_id = auth()->user();
+        $cart = Cart::where('user_id' , $user_id)->first();
+        return view('landing.cart' , compact('cart'));
     }
 }
