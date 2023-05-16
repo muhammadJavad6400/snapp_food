@@ -23,7 +23,6 @@ class CartController extends Controller
             if($cartItem = $product->isInCart()) {
                 if ($type == 'minus' && $cartItem->count == 1) {
                     $cartItem->delete();
-                    return 'محصول مورد نظر از سبد خرید حذف شد';
                 } else {
                     if($type == 'plus') {
                         $cartItem->count++;
@@ -41,10 +40,15 @@ class CartController extends Controller
                     'payable' => $product->price2
                 ]);
             }  
-            return 'محصول مورد نظر به سبد خرید اضافه شد';
+            return [
+                'count' => $cartItem->count,
+                'totalCount' => $cart->total
+            ];
             
         }else{
-            return 'لطفا ابتدا وارد حساب کاربری خود شوید';
+            return [
+                'error' => 'لطفا ابتدا وارد حساب کاربری خود شوید'
+            ];
         }
 
     }
