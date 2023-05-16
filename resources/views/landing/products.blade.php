@@ -54,12 +54,12 @@
                     <a href="#" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>
                     @if ($cartItem = $product->isInCart())
                         <div>
-                            <button type="submit" name="type" value="minus" class="btn btn-warning btn-sm text-white"> - </button>
+                            <button type="button" name="type" value="minus" class="btn btn-warning btn-sm text-white manage-cart"> - </button>
                             <span class="cart-count">{{ $cartItem->count }}</span>
-                            <button type="submit" name="type" value="plus" class="btn btn-warning btn-sm text-white"> + </button>
+                            <button type="button" name="type" value="plus" class="btn btn-warning btn-sm text-white manage-cart"> + </button>
                         </div>    
                     @else    
-                    <button type="submit" name="type" value="plus" class="btn btn-primary btn-sm text-white px-3">افزودن به سبد خرید</button>
+                    <button type="button" name="type" value="plus" class="btn btn-primary btn-sm text-white px-3 manage-cart">افزودن به سبد خرید</button>
                     @endif
                 </form>
             </div>    
