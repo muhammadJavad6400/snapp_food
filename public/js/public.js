@@ -1,5 +1,7 @@
 $(document).on('click' , '.manage-cart' , function() {
-    var url = $(this).parents('form').attr('action');
+    var element = $(this);
+    var form = element.parents('form');
+    var url = form.attr('action');
 
     $.ajaxSetup({
         headers: {
@@ -11,7 +13,10 @@ $(document).on('click' , '.manage-cart' , function() {
         url: url,
         method: 'POST',
         success: function(responsive) {
-            console.log(responsive);
+            var inCartDiv= form.children('.in-cart');
+            var notInCartDiv= form.children('.not-in-cart');
+            inCartDiv.show();
+            notInCartDiv.hide();
         }
 
     });

@@ -24,7 +24,6 @@
         </div>
     </form>
     <hr>
-
     <div class="row">
         @foreach ($products as $product)
             <div class="col-md-4 my-2 product-card">
@@ -47,20 +46,18 @@
                     @else
                         <em>بدون توضیحات</em>   
                     @endif
-                </p>
-                
+                </p>                
                 <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.manage' ,  $product->id) }}">
                     @csrf
                     <a href="#" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>
-                    @if ($cartItem = $product->isInCart())
-                        <div>
+                        <div class="in-cart @if (! $cart_item = $product->isInCart()) hidden @endif">
                             <button type="button" name="type" value="minus" class="btn btn-warning btn-sm text-white manage-cart"> - </button>
-                            <span class="cart-count">{{ $cartItem->count }}</span>
+                            <span class="cart-count">{{ $cart_item->count ?? 0 }}</span>
                             <button type="button" name="type" value="plus" class="btn btn-warning btn-sm text-white manage-cart"> + </button>
-                        </div>    
-                    @else    
-                    <button type="button" name="type" value="plus" class="btn btn-primary btn-sm text-white px-3 manage-cart">افزودن به سبد خرید</button>
-                    @endif
+                        </div>   
+                        <div class="not-in-cart @if ($product->isInCart()) hidden @endif">
+                            <button type="button" name="type" value="plus" class="btn btn-primary btn-sm text-white px-3 manage-cart">افزودن به سبد خرید</button>
+                        </div>   
                 </form>
             </div>    
         @endforeach
