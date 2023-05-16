@@ -2,8 +2,9 @@
 
 @section('content')
 
-    <h4> سبد خرید شما</h4>
+    <h4 class="text-center"> سبد خرید شما</h4>
     <hr>
+    @if ($cart)
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="text-center ">
@@ -58,6 +59,18 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <form action="{{ route('cart.finish') }}" method="post" class="text-center ">
+                @csrf
+                <button type="submit" class="btn btn-success btn-md mt-3">تایید و پرداخت</button>
+            </form>
+    @else
+        <div class="alert alert-info">
+            سبد خرید شما خالی است
+        </div>
+        
+    @endif
+    
 
     </div>
     

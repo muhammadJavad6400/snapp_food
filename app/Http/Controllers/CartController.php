@@ -17,7 +17,7 @@ class CartController extends Controller
         $currentLoggedInUser = auth()->user();
 
         if($currentLoggedInUser) {
-            $cart = Cart::firstOrCreate(['user_id' => $currentLoggedInUser->id]);
+            $cart = Cart::firstOrCreate(['user_id' => $currentLoggedInUser->id , 'finished' => 0]);
 
             // If The Item Is In The Shopping Cart, It Will Be Edited
             if($cartItem = $product->isInCart()) {
@@ -55,5 +55,17 @@ class CartController extends Controller
 
         return back()->withMessage('محصول مورد نظر از سبد خرید حذف شد');
 
+    }
+
+    public function finish()
+    {
+        $cart = Cart::where('user_id' , auth()->id())->where('finished' , 0)->first();
+        if(!$cart) {
+            return back()->withMessage('سبد خریدی وجود ندارد');
+        }
+        $cart->finished = 1;
+        $cart->code = rand(100000 , 999999);
+        $cart->save();
+        return back()->withMessage("پرداخت شما با موفقیت در سیستم ثبت شد. کد پیگیری: $cart->code");      
     }
 }

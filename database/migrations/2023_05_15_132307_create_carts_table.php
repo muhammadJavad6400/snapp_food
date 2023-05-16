@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->boolean('finished')->default(0);
+            $table->unsignedBigInteger('code')->nullable();
             $table->timestamps();
         });
     }
