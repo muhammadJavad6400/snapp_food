@@ -40,6 +40,7 @@ Route::resource('/product', ProductController::class)->except('show');
 
 // Public Route:
 Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('landing');
+Route::get('landing/shop/{shop}' , [LandingController::class , 'showShop'])->name('shop.show');
 
 
 // Cart Route:

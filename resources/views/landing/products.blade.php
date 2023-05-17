@@ -40,13 +40,13 @@
                 </div>
                 <img src="{{asset('image/Iranian-dish.jpg')}}" alt="">
                 <hr>
-                <p class="mt-3">
+                {{-- <p class="mt-3">
                     @if ($product->Row_material)
                         <p>{{$product->Row_material}}</p>   
                     @else
                         <em>بدون توضیحات</em>   
                     @endif
-                </p>                
+                </p>                 --}}
                 <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.manage' ,  $product->id) }}">
                     @csrf
                     <a href="#" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>

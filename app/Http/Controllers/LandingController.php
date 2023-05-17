@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -45,7 +46,8 @@ class LandingController extends Controller
 
     public function shops()
     {
-       return view('landing.shops');
+        $shops = Shop::latest()->paginate(1);
+       return view('landing.shops' , compact('shops'));
     }
 
     public function cart()
@@ -53,5 +55,11 @@ class LandingController extends Controller
         $user_id = auth()->id();
         $cart = Cart::where('user_id' , $user_id)->where('finished' , 0)->first();
         return view('landing.cart' , compact('cart'));
+    }
+
+    public function showShop(Shop $shop)
+    {
+        return view('landing.shop' , compact('shop'));
+        
     }
 }
