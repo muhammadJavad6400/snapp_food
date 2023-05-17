@@ -25,9 +25,9 @@
                     <td>
                         <form action="{{ route('cart.manage' , $cartItem->product_id) }}" method="post">
                             @csrf
-                            <button type="submit" name="type" value="minus" class="btn btn-warning btn-sm text-white"> - </button>
-                            <span class="cart-count">{{ $cartItem->count }}</span>
-                            <button type="submit" name="type" value="plus" class="btn btn-warning btn-sm text-white"> + </button>
+                            <button type="button" name="type" value="minus" class="btn btn-warning btn-sm text-white manage-cart"> - </button>
+                            <span class="cart-count">{{$cartItem->count}}</span>
+                            <button type="button" name="type" value="plus" class="btn btn-warning btn-sm text-white manage-cart"> + </button>
                         </div>    
                         </form>
                     </td>
@@ -54,8 +54,8 @@
                 </thead>
                 <tbody>
                     <tr class="text-center">
-                        <td>{{number_format( $cart->sum) }} تومان</td>
-                        <td>{{ $cart->total }}</td>
+                        <td>{{number_format( $cart->sum)}} تومان</td>
+                        <td>{{$cart->total}}</td>
                     </tr>
                 </tbody>
             </table>

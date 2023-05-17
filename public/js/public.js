@@ -18,12 +18,31 @@ $(document).on('click' , '.manage-cart' , function() {
             type : type
         },
         success: function(response) {
-            var inCartDiv= form.children('.in-cart');
-            var notInCartDiv= form.children('.not-in-cart');
-            inCartDiv.show();
-            notInCartDiv.hide();
-            form.find('.cart-count').text(response.count);
-            $('.cart > span').text(response.totalCount);
+            var alertBox = form.siblings('.alert');
+            
+
+            if(response.error) {
+
+                alertBox.text(response.error);
+                alertBox.show();
+
+            }else {
+                alertBox.hide();
+                
+                var inCartDiv= form.children('.in-cart');
+                var notInCartDiv= form.children('.not-in-cart');
+                if(response.count == 0) {
+                inCartDiv.hide();
+                notInCartDiv.show();
+                }else {
+                inCartDiv.show();
+                notInCartDiv.hide();
+                }
+            
+                form.find('.cart-count').text(response.count);
+                $('.cart > span').text(response.totalCount);
+
+            }
         }
 
     });

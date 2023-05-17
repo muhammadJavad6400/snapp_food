@@ -21,17 +21,17 @@ class CartController extends Controller
 
             // If The Item Is In The Shopping Cart, It Will Be Edited
             if($cartItem = $product->isInCart()) {
-                if ($type == 'minus' && $cartItem->count == 1) {
+                if($type == 'plus') {
+                    $cartItem->count++;
+                }else {
+                    $cartItem->count--;
+               }
+                if ($cartItem->count == 0) {
                     $cartItem->delete();
-                } else {
-                    if($type == 'plus') {
-                        $cartItem->count++;
-                    }else {
-                        $cartItem->count--;
-                   }
+                } else { 
+                    $cartItem->payable = $cartItem->count * $product->price2;
+                    $cartItem->save();
                 }   
-                $cartItem->payable = $cartItem->count * $product->price2;
-                $cartItem->save();
             }else {
                 $cartItem = CartItem::create([
                     'cart_id' => $cart->id,
