@@ -10,7 +10,7 @@
              @endif
         </p>
     </div>
-    <img src="{{asset('image/Iranian-dish.jpg')}}" alt="">
+    <img src="{{asset($product->image ?? 'image/no-image.png')}}" alt="">
     <hr>
     {{-- <p class="mt-3">
         @if ($product->Row_material)
@@ -21,7 +21,7 @@
     </p>                 --}}
     <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.manage' ,  $product->id) }}">
         @csrf
-        <a href="" class="btn btn-primary btn-sm">{{ $product->shop->title ?? '-' }}</a>
+        <p class="text-primary"><b>{{ $product->shop->title ?? '-' }}</b></p>
             <div class="in-cart @if (! $cart_item = $product->isInCart()) hidden @endif">
                 <button type="button" name="type" value="minus" class="btn btn-warning btn-sm text-white manage-cart"> - </button>
                 <span class="cart-count">{{ $cart_item->count ?? 0 }}</span>

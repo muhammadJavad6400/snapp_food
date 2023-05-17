@@ -74,12 +74,10 @@ class ProductController extends Controller
         //validation Request
         $product_validation = $request->validated();
 
-        
-
         //Image
         if(isset($product_validation['image']) && $product_validation['image']){
 
-            $product_validation['iamge'] = upload($product_validation['image']);
+            $product_validation['image'] = upload($product_validation['image']);
         }
 
         //ِDiscount Default
@@ -144,7 +142,7 @@ class ProductController extends Controller
         //Image
         if(isset($product_validation['image']) && $product_validation['image']){
 
-            $product_validation['iamge'] = upload($product_validation['image']);
+            $product_validation['image'] = upload($product_validation['image']);
         }
         //change shop name in the Edit page
         // if(auth()->user()->role == 'admin'){
