@@ -157,22 +157,11 @@ class ProductController extends Controller
 
     }
 
-    public function restore($product , $id , $request)
+    public function restore($id)
     {
-        //Access to All shop
-        if(auth()->user()->role == 'admin'){
-            //َAccess to All products
-            $product_validation['shop_id'] = $request->shop_id;
-        }else{
-            // Access and Delete own products
-            checkPolicy('product' , $product);
-        };
-
-        $product = Product::withTrashed()->where('id' , $id)->firstOrFail();
+        $product = Product::withTrashed()->find($id);
         $product->restore();
-        dd($product);
-        //redirect
-        return redirect()->route('product.index')->withMessage(__('SUCCESS'));      
+        return redirect()->route('product.index')->withMessage(__('SUCCESS'));
     }
 
     public function destroy(Product $product , Request $request)

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware([
 Route::resource('/shop' , ShopController::class)->except('show');
 Route::post("/product/{id}/restore", [ProductController::class , 'restore'])->name('product.restore');
 Route::resource('/product', ProductController::class)->except('show');
+Route::resource('/order' , OrderController::class)->only(['index' , 'destroy']);
 
 
 // Public Route:
