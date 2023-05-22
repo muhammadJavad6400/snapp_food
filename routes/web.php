@@ -37,7 +37,7 @@ Route::middleware([
 Route::resource('/shop' , ShopController::class)->except('show');
 Route::post("/product/{id}/restore", [ProductController::class , 'restore'])->name('product.restore');
 Route::resource('/product', ProductController::class)->except('show');
-Route::resource('/order' , OrderController::class)->only(['index' , 'destroy']);
+Route::resource('/order' , OrderController::class)->only(['index' , 'show' ,  'destroy']);
 
 
 // Public Route:
