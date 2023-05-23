@@ -27,11 +27,10 @@
                     <x-nav-link class="mx-2" href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                          مدیریت محصولات
                     </x-nav-link> 
-                    
-                    <x-nav-link class="mx-2" href="{{ route('order.index') }}" :active="request()->routeIs('order.index')">
-                         لیست سفارشات
-                   </x-nav-link> 
                     @endif
+                    <x-nav-link class="mx-2" href="{{ route('order.index') }}" :active="request()->routeIs('order.index')">
+                        لیست سفارشات
+                  </x-nav-link> 
                 </div>
             </div>
 
