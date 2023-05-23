@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart as Order;
 use App\Models\CartItem;
+use App\Models\Product;
+use App\Models\Shop;
 
 class OrderController extends Controller
 {
@@ -18,7 +20,29 @@ class OrderController extends Controller
     
     public function index()
     {
-        $orders = Order::paginate(10);
+        $currentLoggedInUser = auth()->user();
+
+        if($currentLoggedInUser->role == 'shop') {
+
+            // List Of Shops
+            $currentShop = Shop::where('user_id' , $currentLoggedInUser->id)->first();
+
+            // List Of Product Ids
+            $productId = Product::where('shop_id' , $currentShop->id)->pluck('id')->toArray();
+            
+            // All Item Carts Whose Product_id Is In The $ProductId Range
+            $items = CartItem::whereIn('product_id' , $productId)->paginate(10);
+            
+            return view('order.shop_index' , compact('items'));
+            
+        }else {
+            $orders = Order::query();
+
+        if($currentLoggedInUser->role == 'user') {
+            $orders = $orders->where('user_id' , $currentLoggedInUser->id);
+        }
+        }
+        $orders = $orders->paginate(10);
         return view('order.index' , compact('orders'));
     }
 
