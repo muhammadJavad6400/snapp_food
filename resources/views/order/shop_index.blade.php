@@ -60,6 +60,28 @@
             @endforeach
         </tbody>
     </table>
+
+    <table class="mt-5">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>مشتری</th>
+                <th>شماره تماس</th>
+                <th>آدرس</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($items as $key => $item)
+                <tr>
+                    <th>{{ $key+1 }}</th>
+                    <td>{{  $item->cart->user->name ?? '-'}}</td>
+                    <td>{{ $item->cart->user->telephone ?? '-'}}</td>
+                    <td>{{ $item->cart->user->address ?? '-'}}</td>
+                </tr>
+                
+            @endforeach
+        </tbody>
+    </table>
     <div class="mt-5">
         {{ $items->links() }}
     </div>
