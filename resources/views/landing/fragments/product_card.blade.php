@@ -21,7 +21,7 @@
     </p>                 --}}
     <form class="d-flex justify-content-between align-items-center" method="post" action="{{ route('cart.manage' ,  $product->id) }}">
         @csrf
-        <p class="text-primary"><b>{{ $product->shop->title ?? '-' }}</b></p>
+        <a href="{{ route('show.one' , $product->shop->id)}}" class="btn btn-warning btn-sm text-white"><b>{{ $product->shop->title ?? '-' }}</b></a>
             <div class="in-cart @if (! $cart_item = $product->isInCart()) hidden @endif">
                 <button type="button" name="type" value="minus" class="btn btn-warning btn-sm text-white manage-cart"> - </button>
                 <span class="cart-count">{{ $cart_item->count ?? 0 }}</span>

@@ -46,7 +46,7 @@ class LandingController extends Controller
 
     public function shops()
     {
-        $shops = Shop::latest()->paginate(1);
+        $shops = Shop::first()->paginate(5);
        return view('landing.shops' , compact('shops'));
     }
 
@@ -62,5 +62,12 @@ class LandingController extends Controller
         $products = Product::where('shop_id' , $shop->id)->paginate(9);
         return view('landing.shop' , compact('shop' , 'products'));
         
+    }
+
+    public function showOneShop(Shop $shop)
+    {
+        $products = Product::where('shop_id' , $shop->id)->paginate(9);
+        return view('landing.shop' , compact('shop' , 'products'));
+    
     }
 }
