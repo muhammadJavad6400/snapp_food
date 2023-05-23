@@ -34,7 +34,7 @@ class OrderController extends Controller
             $items = CartItem::whereIn('product_id' , $productId)->paginate(10);
             
             return view('order.shop_index' , compact('items'));
-            
+
         }else {
             $orders = Order::query();
 
