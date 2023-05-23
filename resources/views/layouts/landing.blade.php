@@ -34,6 +34,13 @@
                     حساب کاربری
                 </a>
             </li>
+           @if (auth()->check() && auth()->user())
+           <li class="nav-item align-self-center mx-3">
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">
+                 داشبورد
+            </a>
+        </li>               
+           @endif
         </ul>
 
         <div class="card mt-4">

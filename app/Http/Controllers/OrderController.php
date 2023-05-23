@@ -14,7 +14,7 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin')->only('destroy');
-        
+        $this->middleware('seller')->only('changeStatus');    
     }
 
     
@@ -62,6 +62,16 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('order.show' , compact('order'));
+    }
+
+    public function changeStatus(CartItem $cartItem , Request $request)
+    {
+        //dd($cartItem , $request->all());
+        $cartItem->status = $request->status;
+        $cartItem->save();
+        return back()->withMessage(__('SUCCESS'));
+
+        
     }
 
   

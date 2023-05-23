@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 // default laravel Route
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,6 +38,7 @@ Route::resource('/shop' , ShopController::class)->except('show');
 Route::post("/product/{id}/restore", [ProductController::class , 'restore'])->name('product.restore');
 Route::resource('/product', ProductController::class)->except('show');
 Route::resource('/order' , OrderController::class)->only(['index' , 'show' ,  'destroy']);
+Route::post('/order/status/{cart_item}' , [OrderController::class , 'changeStatus'])->name('order.status');
 
 
 // Public Route:

@@ -31,6 +31,12 @@
                     <x-nav-link class="mx-2" href="{{ route('order.index') }}" :active="request()->routeIs('order.index')">
                         لیست سفارشات
                   </x-nav-link> 
+
+                  @if (auth()->check() && auth()->user())
+                    <x-nav-link class="mx-2" href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
+                          صفحه اصلی
+                    </x-nav-link>   
+                    @endif
                 </div>
             </div>
 
