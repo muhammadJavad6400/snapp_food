@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -43,14 +44,18 @@ Route::post('/order/status/{cart_item}' , [OrderController::class , 'changeStatu
 
 // Public Route:
 Route::get('/landing/{page}' , [LandingController::class , 'loadPage'])->name('landing');
-Route::get('landing/shop/{shop}' , [LandingController::class , 'showShop'])->name('shop.show');
-Route::post('/landing/shop/{shop}' , [LandingController::class , 'showOneShop'])->name('show.one');
+Route::post('landing/shop/{shop}' , [LandingController::class , 'showShop'])->name('shop.show');
+Route::get('/landing/shop/{shop}' , [LandingController::class , 'showOneShop'])->name('show.one');
+Route::get('/landig/product/{product}' , [LandingController::class , 'showProduct'])->name('show.product');
 
 
 // Cart Route:
 Route::post('/cart/manage/{product}' , [CartController::class , 'manage'])->name('cart.manage');
 Route::post('/cart/finish' , [CartController::class , 'finish'])->name('cart.finish');
 Route::delete('/cart/{cart_item}' , [CartController::class , 'remove'])->name('cart.remove');
+
+// Comments
+Route::post('/comment' , [CommentController::class , 'store'])->name('comment.store');
 
 
 

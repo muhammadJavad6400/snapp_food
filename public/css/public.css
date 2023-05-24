@@ -44,3 +44,7 @@
     margin: 20px 0px;
     border-radius: 5px;
 }
+
+.off1 {
+    text-decoration: line-through;
+}

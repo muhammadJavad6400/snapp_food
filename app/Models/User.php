@@ -70,7 +70,16 @@ class User extends Authenticatable
 
     public function cart()
     {
-        return $this->hasMany(Cart::class);
-        
+        return $this->hasMany(Cart::class);    
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);    
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class, Shop::class);
     }
 }

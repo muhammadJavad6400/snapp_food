@@ -61,7 +61,7 @@
         </tbody>
     </table>
 
-    <table class="mt-5">
+    {{-- <table class="mt-5">
         <thead>
             <tr>
                 <th>ردیف</th>
@@ -81,7 +81,8 @@
                 
             @endforeach
         </tbody>
-    </table>
+    </table> --}}
+
     <div class="mt-5">
         {{ $items->links() }}
     </div>

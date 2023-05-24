@@ -38,4 +38,10 @@ class Shop extends Model
         return $this->hasMany(Product::class);
         
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+        
+    }
 }

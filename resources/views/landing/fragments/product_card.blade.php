@@ -1,6 +1,6 @@
 <div class="col-md-4 my-2 product-card">
     <div class="d-flex justify-content-between">
-        <h5>{{ $product->title }}</h5>
+        <h5><a href="{{ route('show.product' , $product->id) }}" class="btn btn-primary">{{ $product->title }}</a></h5>
         <p>      
             @if ($product->discount)
                 <span class="text-danger mx-2 off">{{number_format($product->price)}}</span>
