@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_id');
+            $table->morphs('owner');
+            // $table->unsignedBigInteger('owner_id');
+            // $table->string('owner_type');
             $table->text('text');
             $table->timestamps();
         });

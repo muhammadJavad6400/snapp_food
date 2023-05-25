@@ -27,15 +27,7 @@
       </div>
 </div>
 
-<h5 class="my-3">لطفا نظرات خود را با ما به اشتراک بگذارید</h5>
-<form action="{{ route('comment.store')}}" method="POST">
-    @csrf
-    <input type="hidden" name="product_id" value="{{ $product->id}}">
-    <textarea name="text" id=""  rows="4" placeholder="متن پیام" class="form-control my-2"></textarea>
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">ارسال</button>
-    </div>
-</form>
+@include('landing.fragments.comments'  , ['list' => $product->comments , 'owner_type' => 'Product' , 'owner_id' => $product->id])
 
     
 @endsection
