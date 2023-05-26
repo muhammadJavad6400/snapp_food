@@ -29,13 +29,21 @@
                     <span> {{ cartCount() }} </span>
                 </a>
             </li>
-            @if (!(auth()->check() && auth()->user()))
-            <li class="auth nav-item align-self-center">
-                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
-                    حساب کاربری
-                </a>
-            </li>           
-            @endif
+           <div class="d-flex auth">
+                @if (!(auth()->check() && auth()->user()))    
+                    <li class="nav-item align-self-center mx-3">
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
+                                ثبت نام
+                        </a>
+                    </li>
+            
+                    <li class="nav-item align-self-center">
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
+                                ورود
+                        </a>
+                    </li>         
+                @endif
+            </div>
            @if (auth()->check() && auth()->user())
            <li class="auth nav-item align-self-center">
             <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">
