@@ -56,6 +56,7 @@ Route::delete('/cart/{cart_item}' , [CartController::class , 'remove'])->name('c
 
 // Comments
 Route::post('/comment' , [CommentController::class , 'store'])->name('comment.store');
+Route::delete('/comment/{comment}' , [CommentController::class , 'remove'])->name('remove.comment');
 
 
 

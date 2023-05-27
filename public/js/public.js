@@ -46,4 +46,4 @@ $(document).on('click' , '.manage-cart' , function() {
         }
 
     });
-})
+});

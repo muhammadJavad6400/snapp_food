@@ -45,7 +45,6 @@ class Product extends Model
 
     public function comments()
     {
-        return $this->morphMany(Comment::class , 'owner');
-        
+        return $this->morphMany(Comment::class , 'owner');    
     }
 }

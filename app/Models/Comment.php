@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['owner_id' , 'owner_type' , 'text'];
+    protected $fillable = ['user_id' , 'owner_id' , 'owner_type' , 'text'];
 
 
     public function user()
@@ -21,4 +21,5 @@ class Comment extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
 }

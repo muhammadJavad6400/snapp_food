@@ -13,11 +13,20 @@
     </form>
 
     @foreach ($list as $comment)
-        <div class="alert alert-info my-2">
-            {{ $comment->text }}
-            <hr>
-            {{ persionDate($comment->created_at) }}
-        </div>
-        
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <div class="alert alert-info my-2">
+                <div class="p-2 bd-highlight">{{$comment->user->name ?? '-'}}</div>
+                <div class="p-2 bd-highlight">{{ $comment->text}}</div>
+                <div class="p-2 bd-highlight">{{ persionDate($comment->created_at)}}</div>
+                @if (auth()->check() && auth()->user()->role == 'admin')
+                <form action="{{ route('remove.comment' , $comment->id)}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                </form>
+                @endif    
+            </div>
+        </div> 
     @endforeach
-</div>
+
+    
